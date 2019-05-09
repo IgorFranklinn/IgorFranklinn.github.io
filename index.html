@@ -1,15 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>PUBG</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-</style>
+		<title>PUBG</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/estilo.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	  <script>
+	    $(document).ready(function() {
+	      $("button").click(function() {
+	        $("p2").toggle();
+	      });
+	      $("#hide").click(function() {
+	        $("p1").hide();
+	      });
+	      $("#show").click(function() {
+	        $("p1").show();
+	      });
+	      $('#meuFormulario').on('submit', function(e) {
+	        e.preventDefault();
+	        var len1 = $('#usuario').val().length;
+	        var len2 = $('#senha').val().length;
+	        if (len1 > 0 && len2 > 0) {
+	          localStorage.setItem("usuario", $('#usuario').val());
+	          localStorage.setItem("senha", $('#senha').val());
+	          this.submit();
+	        } else {
+	          alert("Nome e/ou Senha Inválida")
+	        }
+	      });
+
+	    });
+
+	    $(document).ready(function() {
+	         $('#form1').on('submit', function(e) {
+	           e.preventDefault();
+	           var api_url = 'https://api.linkpreview.net'
+	           var key = '5ccb9525ad6e74755159c3ffa27fa10e40287ac64f332' // real
+	           $.ajax({
+	             url: api_url + "?key=" + key + "&q=" + $("#endereco").val(),
+	             contentType: "application/json",
+	             dataType: 'json',
+	             success: function(result) {
+	               $("#p1").text(result.title);
+	               $("#p2").text(result.description);
+	               $('#p3').attr('src', result.image);
+	               $("#p4").text(result.url);
+
+	             }
+	             });
+	            });
+	       });
+
+
+	  </script>
+		<style>
+		body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+		</style>
+
 </head>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 
@@ -27,6 +84,43 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PUBG</a>
     <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>SOBRE</a>
     <a href="formulario.html" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>LOGIN</a>
+		<h1 class="txt">Teste API</h1>
+
+	<form name="form1" id="form1" style="text-align:center;">
+
+		URL:
+
+		<input type="text" id="endereco" name="endereco">
+
+		<br> </br>
+
+		<div class="container">
+
+		<input type="submit" value="ENVIAR" data-toggle="modal" data-target="#myModal2" class="btn btn-primary" >
+
+		<div class="modal fade" id="myModal2" role="dialog">
+			 <div class="modal-dialog modal-sm">
+				 <div class="modal-content">
+					 <div class="modal-header">
+						 <button type="button" class="close" data-dismiss="modal">&times;</button>
+						 <h4 class="modal-title" style="color:black"> </h4>
+					 </div>
+					 <div class="modal-body">
+							 <p id="p1"></p>
+
+						 <p id="p2"></p>
+
+						 <img id="p3" src="" />
+
+						 <p id="p4"></p>
+						 </center>
+					 </div>
+				 </div>
+			 </div>
+		 </div>
+	 </div>
+
+ </form>
   </div>
   <div class="w3-panel w3-large">
 	<a href="https://www.facebook.com/PUBG/" target="_blank"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
@@ -75,10 +169,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </div>
   </div>
 
-
-
-
-
   <!-- Images of Me -->
   <div class="w3-row-padding w3-padding-16" id="about">
     <div class="w3-col m6">
@@ -98,19 +188,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
 <!-- End page content -->
 </div>
-
-<script>
-// Script to open and close sidebar
-function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
-}
-
-function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
-}
-</script>
 
 
 </body>
